@@ -7,6 +7,7 @@ const prisma = new PrismaClient()
 
 const router = express.Router()
 
+//rota de cadastro
 router.post('/cadastro', async (req, res) => {
     const user = req.body
 
@@ -31,6 +32,10 @@ router.post('/cadastro', async (req, res) => {
 }
     
 })
+
+//login
+
+
 
 
 export default router
