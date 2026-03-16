@@ -34,7 +34,25 @@ router.post('/cadastro', async (req, res) => {
 })
 
 //login
+    router.post('/login', async (req,res) => {
 
+        try{
+            const userInfo = req.body
+
+            const user = await prisma.user.findUnique({where: {email: userInfo.email}})
+
+            if(!user){
+                return res.status(404).json({message: "Usuário não encontrado"})
+            }
+
+            res.status(200).json(user)
+
+         }
+         catch (e) {
+            console.log("DETALHE DO ERRO:", e); 
+            res.status(500).json({ message: "Erro no servidor, tente novamente" });
+        }
+    })
 
 
 
