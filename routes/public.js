@@ -14,7 +14,7 @@ router.post('/cadastro', async (req, res) => {
     const hashPassword = await bcrypt.hash(user.password, salt)
 
     try{
-    await prisma.user.create({
+    const UserDb = await prisma.user.create({
         data:{
             email: user.email,
             name: user.name,
@@ -23,7 +23,7 @@ router.post('/cadastro', async (req, res) => {
     })
 
 
-    res.status(201).json(user)
+    res.status(201).json(userDB)
     }
     catch(e){
         res.status(500).json({message: "Erro no servidor, tente novamente"})
