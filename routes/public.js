@@ -45,6 +45,13 @@ router.post('/cadastro', async (req, res) => {
                 return res.status(404).json({message: "Usuário não encontrado"})
             }
 
+            const isMatch = await bcrypt.compare(userInfo.password, user.password)
+
+            if(!isMatch){
+                return res.status(400).json({message: "Senha Inválida"})
+            }
+
+
             res.status(200).json(user)
 
          }
