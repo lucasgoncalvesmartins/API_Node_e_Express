@@ -1,11 +1,14 @@
 import express from 'express'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 import { PrismaClient } from '@prisma/client' 
 
 const prisma = new PrismaClient()
 
 const router = express.Router()
+
+const JWT_SECRET = process.env.JWT_SECRET
 
 //rota de cadastro
 router.post('/cadastro', async (req, res) => {
@@ -33,7 +36,6 @@ router.post('/cadastro', async (req, res) => {
     
 })
 
-//login
     router.post('/login', async (req,res) => {
 
         try{
@@ -52,7 +54,10 @@ router.post('/cadastro', async (req, res) => {
             }
 
 
-            res.status(200).json(user)
+            const token = jwt.sign({id: user.id}, JWT_SECRET, { expiresIn: '15h'})
+
+
+            res.status(200).json(token)
 
          }
          catch (e) {
