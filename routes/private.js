@@ -12,7 +12,7 @@ router.get('/listar-usuarios', async(req, res) => {
 
         res.status(200).json({message: "Usuarios listados com sucesso", users})
 
-
+        
 
     }
     catch (e) {
@@ -20,7 +20,7 @@ router.get('/listar-usuarios', async(req, res) => {
     res.status(500).json({ message: "Erro no servidor, tente novamente" });
     }
 
-
+   
 })
 
 
